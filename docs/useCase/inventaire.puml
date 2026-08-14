@@ -1,0 +1,44 @@
+@startuml Inventaire usecase
+
+left to right direction
+actor Inventaire as in
+rectangle "Gestion Produit et Tiers" {
+    usecase "Authentification" as A
+    usecase "Consulter Statique" as CS
+    usecase "Consulter valeur stock" as VS
+    usecase "Consulter nbr article" as CA
+    usecase "Consulter nbr client" as CC
+    usecase "Gestionner" as G
+    usecase "Gestion client" as GC
+    usecase "Gestion produit" as GP 
+    usecase "Gestion fournisseur" as GF  
+    usecase "Enregistrer fournisseur" as EF  
+    usecase "Enregistrer produit" as EP  
+    usecase "Enregistrer client" as EC   
+    usecase "Lister client" as LC   
+    usecase "Lister produit" as LP   
+    usecase "Lister fournisseur" as LF   
+   
+
+}
+
+
+CS ..>A :<<include>>
+G ..>A :<<include>>
+in--CS
+in--G
+CS <.. CA :<<extend>>
+CS <.. VS :<<extend>>
+CS <.. CC :<<extend>>
+G <.. GC :<<extend>>
+GC <.. EC :<<extend>>
+GC ..>LC  :<<include>>
+G <.. GF :<<extend>>
+GF <.. EF :<<extend>>
+GF ..>LF  :<<include>>
+G <.. GP :<<extend>>
+GP <.. EP :<<extend>>
+GP ..>LP  :<<include>>
+
+
+@enduml
