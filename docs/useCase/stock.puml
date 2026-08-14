@@ -1,0 +1,68 @@
+@startuml stock usecase
+
+left to right direction
+actor Stocks as S
+rectangle "Gestion Stocks" {
+    usecase "Authentification" as A
+    usecase "Gestion Produit et Tiers" as GA
+    usecase "Consulter Statique" as CS
+    usecase "Consulter valeur stock" as VS
+    usecase "Consulter nbr article" as CA
+    usecase "Consulter nbr client" as CC
+    usecase "Gestionner" as G
+    usecase "Gestion client" as GC
+    usecase "Gestion produit" as GP 
+    usecase "Gestion fournisseur" as GF  
+    usecase "Enregistrer fournisseur" as EF  
+    usecase "Enregistrer produit" as EP  
+    usecase "Enregistrer client" as EC   
+    usecase "Lister client" as LC   
+    usecase "Lister produit" as LP   
+    usecase "Lister fournisseur" as LF   
+
+
+
+     usecase "Gestion appro"  as SA
+    usecase "consulter Statistique"  as CST
+    usecase "statsCoutTotalEntres"  as CTE
+    usecase "statsBonReception" as BR
+    usecase "statsFournisseurActifs" as FA
+    usecase "ListerBordereauxLivraisons" as BL
+    usecase "lignes" as L
+    usecase "receptionner" as R
+   
+
+
+
+}
+
+
+GA ..>A :<<include>>
+SA ..>A :<<include>>
+S--GA
+S--SA
+GA ..>CS :<<include>>
+GA ..>G  :<<include>>
+CS <.. CA :<<extend>>
+CS <.. VS :<<extend>>
+CS <.. CC :<<extend>>
+G <.. GC :<<extend>>
+GC <.. EC :<<extend>>
+GC ..>LC  :<<include>>
+G <.. GF :<<extend>>
+GF <.. EF :<<extend>>
+GF ..>LF  :<<include>>
+G <.. GP :<<extend>>
+GP <.. EP :<<extend>>
+GP ..>LP  :<<include>>
+
+SA ..>CST :<<include>>
+SA ..>BL :<<include>>
+CST ..> CTE:<<include>>
+CST ..> BR:<<include>>
+CST ..> FA:<<include>>
+BL <..L:<<extend>>
+BL <..R:<<extend>>
+
+
+@enduml
