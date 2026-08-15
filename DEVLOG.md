@@ -59,3 +59,14 @@
                             et aussi le modifier sur les schema sql et sqlite
 
 - **Difficultés / Obstacles** : les methodes qui doit etre sur les classes ne peut elle as etre ammener par les requettes 
+
+### Step 2.2 Repositories & SQL Sécurisé
+- **Heure de réalisation** : 12:00
+- **Ce qui a été fait** :`ProduitRepository`, `ClientRepository`,
+                            `FournisseurRepository` — Faire des recherchere pour transformer le tableau 
+                            associative venant du bd en Objet avec tabToObjet qui prend chaque ligne et le
+                            transforme en new Objet ainsi utiliser array_map pour pouvoir avoir un tableau
+                            numeric contenant un type d'objet , Ecrire les requetes sql dans le `schema.sql`le tester
+                            et l ajouter dasns les repository
+
+- **Difficultés / Obstacles** : inplementer les fontions database fait en POO dans les repository 

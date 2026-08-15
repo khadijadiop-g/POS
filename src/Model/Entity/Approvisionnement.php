@@ -9,13 +9,13 @@ class Approvisionnement
     private StatutAppro $statutId; 
 
 
-    public function __construct(Fournisseur $fournisseurId, Utilisateur $utilisateurId, string $refBl, ?int $id = null, StatutAppro $statut = 'EN_COURS')
+    public function __construct(Fournisseur $fournisseurId, Utilisateur $utilisateurId, string $refBl, ?int $id = null, ?StatutAppro $statut = null)
     {
         $this->id = $id;
         $this->fournisseurId = $fournisseurId;
         $this->utilisateurId = $utilisateurId;
         $this->refBl = $refBl;
-        $this->statutId = $statut;
+        $this->statutId = $statut ?? new StatutAppro('EN_COURS', null);
     }
 
     public function getId(): ?int { return $this->id; }

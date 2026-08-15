@@ -119,3 +119,24 @@ CREATE TABLE lignes_appro (
     prix_reel   NUMERIC(12,2) NOT NULL CHECK (prix_reel >= 0)
 );
 
+INSERT INTO produits (libelle,prix_vente,stock_initial)
+VALUES (:libelle,:prix_vente,:stock_initial);
+
+SELECT * FROM produits ;
+
+INSERT INTO clients (prenom,nom,email,tel,limite_credit)
+VALUES (:prenom,:nom,:email,:tel,:limite_credit);
+
+SELECT * FROM clients ;
+
+INSERT INTO fournisseurs (nom,email,tel,adresse)
+VALUES (:nom,:email,:tel,:adresse);
+
+SELECT * FROM fournisseurs ;
+
+SELECT count(id) AS nbr_client FROM clients;
+SELECT count(id) AS nbr_produit FROM produits;
+
+SELECT SUM(COALESCE(prix_vente,0)*COALESCE(stock_initial,0)) AS total_stock FROM produits ;
+
+SELECT * FROM produits WHERE stock_initial <= seuil_alerte
