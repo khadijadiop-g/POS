@@ -46,3 +46,16 @@
                             new Database() dans getInstance() — équivalents ici car pas d'héritage
                             sur cette classe, self fait juste référence à la classe où le code est
                             écrit.
+
+### PHASE 2 : SAMEDI (09h00 - 20h00) — Cœur POO & Ventes POS
+### Step 2.1 (09h00 - 11h00) : Entités POO Pure
+- **Heure de réalisation** : 09:00
+- **Ce qui a été fait** :Création de toutes les entités dans `src/Model/Entity/` :
+                            `Produit`, `Client`, `Fournisseur`, `Utilisateur`,
+                            `Commande`, `LigneCommande`, `Dette`, `Reglement`,
+                            `Appro`, `LigneAppro`,`role`,`Modepaiement`,`SatutAppro`. 
+                            Toutes les propriétés sont`private` (encapsulation), accès uniquement pour 
+                            les methodes de la classe .J ai aussi toucher la diagramme de classe pour gerer la relation entre dette et commande
+                            et aussi le modifier sur les schema sql et sqlite
+
+- **Difficultés / Obstacles** : les methodes qui doit etre sur les classes ne peut elle as etre ammener par les requettes 

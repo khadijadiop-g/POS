@@ -31,15 +31,11 @@ class Commande{
 
 class Dette{
      id 
-     qteCommande 
+     montantDu
+     montant_paye
+     statut 
      prixReel 
 }
-
-class StatutAppro{
-     id 
-     nom
-}
-
 
 class LigneCommande{
      id 
@@ -109,6 +105,8 @@ Reglement "0..*" --> "1" Commande
 
 Appro "0..*" --> "1" Utilisateur 
 Commande "0..*" --> "1" Utilisateur
+Dette "0..1" --> "1" Commande
+Dette "0..1" --> "1..*" Reglement
 
 
 

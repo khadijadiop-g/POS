@@ -12,9 +12,11 @@ class Database
         try {
             $dsn = "pgsql:host={$config['pgsql']['host']};port={$config['pgsql']['port']};dbname={$config['pgsql']['dbname']}";
             $this->pdo = new PDO($dsn, $config['pgsql']['user'], $config['pgsql']['password']);
+            echo "Connexion à la base de données PostgreSQL réussie.";
         } catch (PDOException $e) {
             $this->pdo = new PDO('sqlite:' . $config['sqlite']['path']);
             $this->pdo->exec('PRAGMA foreign_keys = ON;');
+            echo "Connexion à la base de données SQLite réussie.";
         }
 
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -35,36 +37,4 @@ class Database
         return $this->pdo;
     }
 
-    public function query(string $sql, bool $single = true): array
-    {
-        $result = $this->pdo->query($sql);
-        return $single ? $result->fetch() : $result->fetchAll();
-    }
-
-    public function prepare(string $sql, array $datas): PDOStatement
-    {
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute($datas);
-        return $stmt;
-    }
-
-    public function executeQuery(string $sql, array $datas, bool $single = true): array
-    {
-        $stmt = $this->prepare($sql, $datas);
-        return $single ? $stmt->fetch() : $stmt->fetchAll();
-    }
-
-    // Pour un INSERT / UPDATE / DELETE avec paramètres
-    public function executeUpdate(string $sql, array $datas): int
-    {
-        $stmt = $this->prepare($sql, $datas);
-
-        return str_starts_with(strtoupper($sql), 'INSERT')
-            ? (int) $this->pdo->lastInsertId()
-            : $stmt->rowCount();
-    }
-
-    private function __clone()
-    {
-    }
 }
