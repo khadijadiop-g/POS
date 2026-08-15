@@ -11,7 +11,6 @@
                                 Ainsi que sur les modes de paiement pour les dettes
 ### Step 1.2
 
-### ☀️ [Vendredi - Phase 1] : Schéma SQL PostgreSQL / SQLite
 - **Heure de réalisation** : 21h20
 - **Ce qui a été fait** : ecriture des scripts schema.sql (PostgreSQL) et schema_sqlite.sql
                             du diagramme de classes creation des tables,ajout des
@@ -22,3 +21,28 @@
                                                                         sudo apt install sqlite3
                                                                         ET insatllation de l extension sqlite bd explorer
 - **Difficultés / Obstacles** : J ai jammais enttendu parler du sqlite du et comment le manipuler
+
+### Step 1.3
+
+- **Heure de réalisation** : 23:00
+- **Ce qui a été fait** : Création de src/Core/Database.php pour singleton et création de src/Core/env.php 
+                            pour mes donnees de connexion a la base . Le constructeur est
+                            private pour empêcher tout new Database() en dehors de la classe.
+                            Une propriété statique $instance garde en mémoire l'unique objet créé :
+                            getInstance() vérifie si $instance est null, le crée une seule fois
+                            si besoin (self::$instance = new self();), puis renvoie toujours ce
+                            même objet à tous les appels suivants. Résultat : une seule connexion PDO
+                            ouverte pour toute l'application, quel que soit le nombre d'endroits qui
+                            appellent Database::getInstance().
+                            Le __construct() tente la connexion PostgreSQL dans un try, et bascule
+                            automatiquement sur SQLite (erp.db) dans le catch (PDOException $e) si
+                            PostgreSQL est injoignable — avec PRAGMA foreign_keys = ON; en plus côté
+                            SQLite, car contrairement à PostgreSQL il ne vérifie pas les clés
+                            étrangères par défaut.
+                            Ajout de private function __clone() {} pour empêcher de dupliquer
+                            l'instance (cloner casserait le principe du Singleton).
+                          
+- **Difficultés / Obstacles** : la différence entre new self() et
+                            new Database() dans getInstance() — équivalents ici car pas d'héritage
+                            sur cette classe, self fait juste référence à la classe où le code est
+                            écrit.
