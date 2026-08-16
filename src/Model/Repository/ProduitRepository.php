@@ -53,4 +53,20 @@ class ProduitRepository
         return array_map(fn($ligne) => $this->tabToObjet($ligne), $lignes);
     }
 
+     public function getProductById(int $id): ?Produit
+    {
+        $sql = "SELECT * FROM produits WHERE id = :id";
+        $ligne = $this->dtb->executeQuery($sql, ['id' => $id], true);
+        return $ligne ? $this->tabToObjet($ligne) : null;
+    }
+
+  public function ajusterStock(int $produitId, int $quantite): int
+    {
+        $sql = "UPDATE produits SET stock_initial = stock_initial + :quantite WHERE id = :id";
+        return $this->dtb->executeUpdate($sql, [
+            'quantite' => $quantite,
+            'id' => $produitId,
+        ]);
+    }
+
 }

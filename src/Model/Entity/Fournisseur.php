@@ -19,4 +19,7 @@ class Fournisseur
 
     public function getId(): int { return $this->id; }
     public function getNom(): string { return $this->nom; }
+    public function getEmail(): ?string { return $this->email; }
+    public function getTel(): ?string { return $this->tel; }
+    public function getAdresse(): ?string { return $this->adresse; }
 }

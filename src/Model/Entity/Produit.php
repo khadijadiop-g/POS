@@ -21,6 +21,7 @@ class Produit
     public function getLibelle(): string { return $this->libelle; }
     public function getPrixVente(): float { return $this->prixVente; }
     public function getSeuilAlerte(): int { return $this->seuilAlerte; }
+    public function getStockInitial(): int { return $this->stockInitial; }
 
     public function estEnRupture(): bool
     {

@@ -70,3 +70,14 @@
                             et l ajouter dasns les repository
 
 - **Difficultés / Obstacles** : inplementer les fontions database fait en POO dans les repository 
+
+### Step 2.3 VenteService & Transaction SQL
+- **Heure de réalisation** : 21h30
+- **Ce qui a été fait** : `src/Service/VenteService.php` avec `validerVente()` : je verifie d'abord
+                            le stock et le montant total AVANT de toucher la BD, puis je verifie la
+                            limite de credit du client (somme des dettes en cours + reste a payer <=
+                            limite_credit). Ensuite tout se passe dans une transaction PDO
+                            (beginTransaction/commit/rollBack) : creation de la commande, des lignes
+                            de commande, decrementation du stock produit par produit, et creation
+                            d'une dette si le client n'a pas tout paye.
+- **Difficultés / Obstacles** : le servive qui appel le model alors que c etait le role du controller 
