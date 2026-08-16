@@ -81,3 +81,11 @@
                             de commande, decrementation du stock produit par produit, et creation
                             d'une dette si le client n'a pas tout paye.
 - **Difficultés / Obstacles** : le servive qui appel le model alors que c etait le role du controller 
+
+
+### Step 2.4 POSController & Vue Caisse
+- **Heure de réalisation** : 17h00
+- **Ce qui a été fait** : `src/Controller/POSController.php` qui recupere les produits et clients
+                            pour affichage, traite le POST du panier  et appelle VenteService. Vue simple
+                            `views/pos/index.php`
+- **Difficultés / Obstacles** : 
