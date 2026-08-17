@@ -67,5 +67,3 @@ class POSController
 
 }
 
-$controller = new POSController();
-$controller->index();
