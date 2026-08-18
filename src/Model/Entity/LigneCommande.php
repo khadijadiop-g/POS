@@ -16,9 +16,13 @@ class LigneCommande
     }
 
     public function getId(): ?int { return $this->id; }
+    public function setId(?int $id): void { $this->id = $id; }
     public function getProduitId(): Produit { return $this->produitId; }
+    public function setProduitId(Produit $produitId): void { $this->produitId = $produitId; }
     public function getQteCommande(): int { return $this->qteCommande; }
+    public function setQteCommande(int $qteCommande): void { $this->qteCommande = $qteCommande; }
     public function getPrixReel(): float { return $this->prixReel; }
+    public function setPrixReel(float $prixReel): void { $this->prixReel = $prixReel; }
 
     public function getSousTotal(): float
     {

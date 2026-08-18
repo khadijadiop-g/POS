@@ -24,6 +24,12 @@ class Commande
 
     public function getId(): ?int { return $this->id; }
     public function setId(int $id): void { $this->id = $id; }
+    public function setClientId(Client $clientId): void { $this->clientId = $clientId; }
+    public function setDateCreation(DateTime $dateCreation): void { $this->dateCreation = $dateCreation; }
+    public function setUtilisateurId(Utilisateur $utilisateurId): void { $this->utilisateurId = $utilisateurId; }
+    public function setModePaiementId(?ModePaiement $modePaiementId): void { $this->modePaiementId = $modePaiementId; }
+    public function setMontantTotal(float $montantTotal): void { $this->montantTotal = $montantTotal; }
+    public function setMontantVerse(float $montantVerse): void { $this->montantVerse = $montantVerse; }
     public function getClientId(): Client { return $this->clientId; }
     public function getDateCreation(): DateTime { return $this->dateCreation; }
     public function getUtilisateurId(): Utilisateur { return $this->utilisateurId; }

@@ -12,7 +12,7 @@ class ClientRepository
 
     }
 
-    public function tabToObjet(array $data): Client
+    public static function tabToObjet(array $data): Client
     {
 
         return new Client(
@@ -25,20 +25,20 @@ class ClientRepository
         );
     }
 
-    public function getAllClients(): array
+    public static function getAllClients(): array
     {
         $sql = "SELECT * FROM clients ORDER BY prenom ASC";
-        $lignes = $this->dtb->query($sql, false);
-        return array_map(fn($ligne) => $this->tabToObjet($ligne), $lignes);
+        $lignes = ClientRepository::$dtb->query($sql, false);
+        return array_map(fn($ligne) => ClientRepository::tabToObjet($ligne), $lignes);
     }
 
-    public function saveClient(string $nom, string $prenom, ?string $email, ?string $tel, float $limite_credit): int
+    public static function saveClient(string $nom, string $prenom, ?string $email, ?string $tel, float $limite_credit): int
     {
 
         $sql = "INSERT INTO clients (nom, prenom, email, tel, limite_credit)
                 VALUES (:nom, :prenom, :email, :tel, :limite_credit)";
 
-        return $this->dtb->executeUpdate($sql, [
+        return ClientRepository::$dtb->executeUpdate($sql, [
             'nom' => $nom,
             'prenom' => $prenom,
             'email' => $email,
@@ -47,19 +47,19 @@ class ClientRepository
         ]);
     }
 
-     public function getClientById(int $id): ?Client
+     public static function getClientById(int $id): ?Client
     {
         $sql = "SELECT * FROM clients WHERE id = :id";
-        $ligne = $this->dtb->executeQuery($sql, ['id' => $id], true);
-        return $ligne ? $this->tabToObjet($ligne) : null;
+        $ligne = ClientRepository::$dtb->executeQuery($sql, ['id' => $id], true);
+        return $ligne ? ClientRepository::tabToObjet($ligne) : null;
     }
 
     // Somme des dettes NON_SOLDEE du client : sert a verifier la limite de credit dans VenteService
-    public function getTotalDettesEnCours(int $clientId): float
+    public static function getTotalDettesEnCours(int $clientId): float
     {
         $sql = "SELECT COALESCE(SUM(montant_restant), 0) AS total
                 FROM dettes WHERE client_id = :client_id AND statut = 'NON_SOLDEE'";
-        $ligne = $this->dtb->executeQuery($sql, ['client_id' => $clientId], true);
+        $ligne = ClientRepository::$dtb->executeQuery($sql, ['client_id' => $clientId], true);
         return (float) $ligne['total'];
     }
 

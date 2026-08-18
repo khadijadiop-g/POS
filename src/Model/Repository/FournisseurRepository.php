@@ -12,7 +12,7 @@ class FournisseurRepository
 
     }
 
-    public function tabToObjet(array $data): Fournisseur
+    public static function tabToObjet(array $data): Fournisseur
     {
 
         return new Fournisseur(
@@ -24,22 +24,22 @@ class FournisseurRepository
         );
     }
 
-    public function getAllFournisseurs(): array
+    public static function getAllFournisseurs(): array
     {
         $sql = "SELECT * FROM fournisseurs ORDER BY nom ASC";
-        $lignes = $this->dtb->query($sql, false);
-        return array_map(fn($ligne) => $this->tabToObjet($ligne), $lignes);
+        $lignes = FournisseurRepository::$dtb->query($sql, false);
+        return array_map(fn($ligne) => FournisseurRepository::tabToObjet($ligne), $lignes);
     }
 
   
 
-    public function saveFournisseur(string $nom, ?string $email, ?string $tel, ?string $adresse): int
+    public static function saveFournisseur(string $nom, ?string $email, ?string $tel, ?string $adresse): int
     {
 
         $sql = "INSERT INTO fournisseurs (nom, email, tel, adresse)
                 VALUES (:nom, :email, :tel, :adresse)";
 
-        return $this->dtb->executeUpdate($sql, [
+        return FournisseurRepository::$dtb->executeUpdate($sql, [
             'nom' => $nom,
             'email' => $email,
             'tel' => $tel,

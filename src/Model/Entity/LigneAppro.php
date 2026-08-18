@@ -20,11 +20,17 @@ class LigneAppro
     }
 
     public function getId(): ?int { return $this->id; }
+    public function setId(?int $id): void { $this->id = $id; }
     public function getProduitId(): Produit { return $this->produitId; }
+    public function setProduitId(Produit $produitId): void { $this->produitId = $produitId; }
     public function getApproId(): Approvisionnement { return $this->approId; }
+    public function setApproId(Approvisionnement $approId): void { $this->approId = $approId; }
     public function getQteAppro(): int { return $this->qteAppro; }
+    public function setQteAppro(int $qteAppro): void { $this->qteAppro = $qteAppro; }
     public function getQteRecu(): int { return $this->qteRecu; }
+    public function setQteRecu(int $qteRecu): void { $this->qteRecu = $qteRecu; }
     public function getPrixReel(): float { return $this->prixReel; }
+    public function setPrixReel(float $prixReel): void { $this->prixReel = $prixReel; }
 
     public function estCompletementRecu(): bool
     {

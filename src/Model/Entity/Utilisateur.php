@@ -18,10 +18,15 @@ class Utilisateur
     }
 
     public function getId(): int { return $this->id; }
+    public function setId(int $id): void { $this->id = $id; }
     public function getNomComplet(): string { return $this->nomComplet; }
+    public function setNomComplet(string $nomComplet): void { $this->nomComplet = $nomComplet; }
     public function getEmail(): string { return $this->email; }
+    public function setEmail(string $email): void { $this->email = $email; }
     public function getMotPasseHache(): string { return $this->motPasse; }
+    public function setMotPasseHache(string $motPasse): void { $this->motPasse = $motPasse; }
     public function getRole(): Role { return $this->roleId; }
+    public function setRole(Role $roleId): void { $this->roleId = $roleId; }
 
 
 }

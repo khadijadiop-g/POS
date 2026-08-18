@@ -5,7 +5,7 @@ require_once dirname(__DIR__) . "/Entity/Produit.php";
 class ProduitRepository
 {
 
-    private Database $dtb;
+    private static Database $dtb;
 
     public function __construct(Database $dtb)
     {
@@ -13,7 +13,7 @@ class ProduitRepository
 
     }
 
-    public function tabToObjet(array $data): Produit
+    public static function tabToObjet(array $data): Produit
     {
 
         return new Produit(
@@ -25,20 +25,20 @@ class ProduitRepository
         );
     }
 
-    public function getAllProducts(): array
+    public static function getAllProducts(): array
     {
         $sql = "SELECT * FROM produits";
-        $lignes = $this->dtb->query($sql, false);
-        return array_map(fn($ligne) => $this->tabToObjet($ligne), $lignes);
+        $lignes = ProduitRepository::$dtb->query($sql, false);
+        return array_map(fn($ligne) => ProduitRepository::tabToObjet($ligne), $lignes);
     }
 
-    public function saveProduct(string $libelle, float $prix, int $stock, int $seuilAlerte = 5): int
+    public  static function saveProduct(string $libelle, float $prix, int $stock, int $seuilAlerte = 5): int
     {
 
         $sql = "INSERT INTO produits (libelle, prix_vente, stock_initial, seuil_alerte)
                 VALUES (:libelle, :prix_vente, :stock_initial, :seuil_alerte)";
 
-        return $this->dtb->executeUpdate($sql, [
+        return ProduitRepository::$dtb->executeUpdate($sql, [
             'libelle' => $libelle,
             'prix_vente' => $prix,
             'stock_initial' => $stock,
@@ -46,24 +46,24 @@ class ProduitRepository
         ]);
     }
 
-    public function getProductEnRupture(): array
+    public static function getProductEnRupture(): array
     {
         $sql = "SELECT * FROM produits WHERE stock_initial <= seuil_alerte";
-        $lignes = $this->dtb->query($sql, false);
-        return array_map(fn($ligne) => $this->tabToObjet($ligne), $lignes);
+        $lignes = ProduitRepository::$dtb->query($sql, false);
+        return array_map(fn($ligne) => ProduitRepository::tabToObjet($ligne), $lignes);
     }
 
-     public function getProductById(int $id): ?Produit
+     public static function getProductById(int $id): ?Produit
     {
         $sql = "SELECT * FROM produits WHERE id = :id";
-        $ligne = $this->dtb->executeQuery($sql, ['id' => $id], true);
-        return $ligne ? $this->tabToObjet($ligne) : null;
+        $ligne = ProduitRepository::$dtb->executeQuery($sql, ['id' => $id], true);
+        return $ligne ? ProduitRepository::tabToObjet($ligne) : null;
     }
 
-  public function ajusterStock(int $produitId, int $quantite): int
+  public static function ajusterStock(int $produitId, int $quantite): int
     {
         $sql = "UPDATE produits SET stock_initial = stock_initial + :quantite WHERE id = :id";
-        return $this->dtb->executeUpdate($sql, [
+        return ProduitRepository::$dtb->executeUpdate($sql, [
             'quantite' => $quantite,
             'id' => $produitId,
         ]);
